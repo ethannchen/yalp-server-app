@@ -3,8 +3,9 @@ import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
 import session from "express-session";
-import businessRoutes from "./businesses/routes.js";
+import BusinessRoutes from "./businesses/routes.js";
 import Hello from "./hello.js";
+import ReviewRoutes from "./review/routes.js";
 
 const CONNECTION_STRING =
   process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/yalp";
@@ -37,7 +38,8 @@ if (process.env.NODE_ENV !== "development") {
 }
 app.use(session(sessionOptions));
 app.use(express.json());
-businessRoutes(app);
+BusinessRoutes(app);
+ReviewRoutes(app);
 Hello(app);
 
 app.listen(process.env.PORT || 4000);

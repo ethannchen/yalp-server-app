@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const HEROKU_APP = "https://cors-anywhere.herokuapp.com/";
+// export const HEROKU_APP = "https://cors-anywhere.herokuapp.com/";
 export const YELP_API = "https://api.yelp.com/v3";
 export const API_KEY = process.env.REACT_APP_YELP_API_KEY;
 
-function businessRoutes(app) {
+function BusinessRoutes(app) {
   const config = {
     headers: {
       Authorization: `Bearer ${API_KEY}`,
@@ -30,19 +30,19 @@ function businessRoutes(app) {
     );
     res.json(business.data);
   };
-  const findReviewsByBusinessId = async (req, res) => {
-    const { id } = req.params;
-    const reviews = await axios.get(
-      //   `${HEROKU_APP}${YELP_API}/businesses/${businessId}/reviews`,
-      `${YELP_API}/businesses/${id}/reviews`,
-      config
-    );
-    res.json(reviews.data);
-  };
+  // const findReviewsByBusinessId = async (req, res) => {
+  //   const { id } = req.params;
+  //   const reviews = await axios.get(
+  //     //   `${HEROKU_APP}${YELP_API}/businesses/${businessId}/reviews`,
+  //     `${YELP_API}/businesses/${id}/reviews`,
+  //     config
+  //   );
+  //   res.json(reviews.data);
+  // };
 
   app.get("/api/businesses/:term/:location", findBusinesses);
   app.get("/api/businesses/:id", findBusinessById);
-  app.get("/api/businesses/:id/reviews", findReviewsByBusinessId);
+  // app.get("/api/businesses/:id/reviews", findReviewsByBusinessId);
 }
 
-export default businessRoutes;
+export default BusinessRoutes;

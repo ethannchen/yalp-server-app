@@ -3,9 +3,12 @@ import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
 import session from "express-session";
-import userRoute from "./users/routes.js"
-import reviewRoute from "./review/routes.js"
-import homepageRoute from "./homepage/routes.js"
+import BusinessRoutes from "./businesses/routes.js";
+import UserRoutes from "./users/routes.js";
+import FollowsRoutes from "./follows/routes.js";
+import Hello from "./hello.js";
+import ReviewRoutes from "./review/routes.js";
+
 const CONNECTION_STRING =
   process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/yalp";
 mongoose.connect(CONNECTION_STRING);
@@ -17,7 +20,8 @@ app.get("/hello", (req, res) => {
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    // origin: process.env.FRONTEND_URL,
+    origin: "http://localhost:3000",
   })
 );
 app.use(express.json());
@@ -38,5 +42,11 @@ userRoute(app);
 reviewRoute(app);
 homepageRoute(app);
 app.use(session(sessionOptions));
+app.use(express.json());
+BusinessRoutes(app);
+ReviewRoutes(app);
+UserRoutes(app);
+FollowsRoutes(app);
+Hello(app);
 
 app.listen(process.env.PORT || 4000);

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import schema from "./schema.js";
-const model = mongoose.model("users", schema);
-model.updateOne({username:'bob'})
+import userSchema from "./schema.js";
+const model = mongoose.model("users", userSchema);
 export default model;

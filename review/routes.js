@@ -1,29 +1,46 @@
 import * as dao from "./dao.js";
 function ReviewRoutes(app) {
-  const findAllReviews = async (req, res) => {
-    const reviews = await dao.findAllReviews();
+  const findAllReviewsByRestaurantId = async (req, res) => {
+    const { restaurantId } = req.params;
+    const reviews = await dao.findAllReviewsByRestaurantId(restaurantId);
     res.json(reviews);
   };
 
   const createReviewsByUser = async (req, res) => {
-    const review = await dao.createReviewsByUser(req.body);
+    const { restaurantId, userId, reviewContent } = req.params;
+    const review = await dao.createReviewsByUser(
+      userId,
+      restaurantId,
+      reviewContent
+    );
     res.json(review);
   };
 
   const updateReviews = async (req, res) => {
-    const { restaurantId } = req.params;
-    const status = await dao.updateReviews(restaurantId, req.body);
+    const { restaurantId, userId, reviewContent } = req.params;
+    const status = await dao.updateReviews(userId, restaurantId, reviewContent);
     res.json(status);
   };
 
   const deleteReviews = async (req, res) => {
-    const review = await dao.deleteReviews(req.params.restaurantId);
+    const { restaurantId, userId } = req.params;
+    const status = await dao.deleteReviews(userId, restaurantId);
+    res.json(status);
+  };
+
+  const findReviewByUserId = async (req, res) => {
+    const { userId, restaurantId } = req.params;
+    const review = await dao.getReviewByUserId(userId, restaurantId);
     res.json(review);
   };
-  
-  app.get("/api/review", findAllReviews);
-  app.post("/api/review", createReviewsByUser);
-  app.put("/api/review/:restaurantId", updateReviews);
-  app.delete("/api/review/:restaurantId", deleteReviews);
+
+  app.get("/api/review/:restaurantId", findAllReviewsByRestaurantId); //ok
+  app.get("/api/user/:userId/:restaurantId", findReviewByUserId); //ok
+  app.post(
+    "/api/review/:restaurantId/:userId/:reviewContent",
+    createReviewsByUser
+  ); //ok
+  app.put("/api/review/:restaurantId/:userId/:reviewContent", updateReviews); //ok
+  app.delete("/api/review/:restaurantId/:userId", deleteReviews); //ok
 }
 export default ReviewRoutes;

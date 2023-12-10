@@ -3,6 +3,9 @@ import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
 import session from "express-session";
+import BusinessRoutes from "./businesses/routes.js";
+import Hello from "./hello.js";
+import ReviewRoutes from "./review/routes.js";
 
 const CONNECTION_STRING =
   process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/yalp";
@@ -15,7 +18,8 @@ app.get("/hello", (req, res) => {
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    // origin: process.env.FRONTEND_URL,
+    origin: "http://localhost:3000",
   })
 );
 app.use(express.json());
@@ -33,5 +37,9 @@ if (process.env.NODE_ENV !== "development") {
   };
 }
 app.use(session(sessionOptions));
+app.use(express.json());
+BusinessRoutes(app);
+ReviewRoutes(app);
+Hello(app);
 
 app.listen(process.env.PORT || 4000);

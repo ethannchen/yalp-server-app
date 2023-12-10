@@ -37,7 +37,7 @@ function ReviewRoutes(app) {
   const getReviewsByUserId = async (req, res) => {
     const {userId} = req.params;
     const reviews = await dao.getReviewsByUserId(userId);
-    res.json(review);
+    res.json(reviews);
   }
 
   app.get("/api/review/:restaurantId", findAllReviewsByRestaurantId); //ok

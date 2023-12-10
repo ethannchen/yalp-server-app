@@ -38,11 +38,9 @@ if (process.env.NODE_ENV !== "development") {
     secure: true,
   };
 }
-userRoute(app);
-reviewRoute(app);
-homepageRoute(app);
 app.use(session(sessionOptions));
 app.use(express.json());
+homepageRoute(app);
 BusinessRoutes(app);
 ReviewRoutes(app);
 UserRoutes(app);

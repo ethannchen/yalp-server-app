@@ -4,6 +4,8 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import session from "express-session";
 import BusinessRoutes from "./businesses/routes.js";
+import UserRoutes from "./users/routes.js";
+import FollowsRoutes from "./follows/routes.js";
 import Hello from "./hello.js";
 import ReviewRoutes from "./review/routes.js";
 
@@ -40,6 +42,8 @@ app.use(session(sessionOptions));
 app.use(express.json());
 BusinessRoutes(app);
 ReviewRoutes(app);
+UserRoutes(app);
+FollowsRoutes(app);
 Hello(app);
 
 app.listen(process.env.PORT || 4000);

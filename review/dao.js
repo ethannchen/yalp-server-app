@@ -22,3 +22,5 @@ export const getReviewByUserId = (userId, restaurantId) =>
   model.find({ userId, restaurantId });
 // export const getReviewsByRestaurantId = (restaurantId) =>
 //   model.findById(restaurantId);
+
+export const getReviewsByUserId = (userId) => model.find({ userId });

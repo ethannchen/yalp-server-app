@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
       type: String,
       enum: ["OWNER", "USER", "ADMIN"],
       default: "USER" },
-    userProfileImg: URL
+    userProfileImg: String
   },
   { collection: "users" });
 export default userSchema;

@@ -1,5 +1,5 @@
-import userDao from "../users/dao.js"
-import reviewDao from "../review/dao.js"
+import * as userDao from "../users/dao.js"
+import * as reviewDao from "../review/dao.js"
 function HomepageRoutes(app) {
   const getAllUsers = async (req, res) => {
     const users = await userDao.findAllUsers();

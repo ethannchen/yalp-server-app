@@ -4,7 +4,7 @@ const reviewSchema = new mongoose.Schema({
     restaurantId: { type: String, required: true, unique: true },
     content: String,
     date: Date,
-    img: URL
+    img: String
   },
   { collection: "review" });
 export default reviewSchema;

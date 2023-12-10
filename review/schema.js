@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
-const reviewSchema = new mongoose.Schema({
-    userId: { type: String, required: true, unique: true },
-    restaurantId: { type: String, required: true, unique: true },
-    content: String,
-    date: Date,
-    img: String
+const reviewSchema = new mongoose.Schema(
+  {
+    // user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    userId: { type: String, required: true },
+    restaurantId: { type: String, required: true },
+    content: { type: String, required: true },
+    // date: Date,
+    // img: URL,
   },
-  { collection: "review" });
+  { collection: "review" }
+);
 export default reviewSchema;

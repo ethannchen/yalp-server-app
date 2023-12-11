@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 const reviewSchema = new mongoose.Schema(
   {
-    // user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    username: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
     userId: { type: String, required: true },
     restaurantId: { type: String, required: true },
+    restaurantName: String,
     content: { type: String, required: true },
-    // date: Date,
-    // img: URL,
+    date: Date,
+    img: String,
   },
   { collection: "review" }
 );

@@ -8,10 +8,14 @@ import UserRoutes from "./users/routes.js";
 import FollowsRoutes from "./follows/routes.js";
 import Hello from "./hello.js";
 import ReviewRoutes from "./review/routes.js";
+import HomepageRoutes from "./homepage/routes.js";
 
 const CONNECTION_STRING =
   process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/yalp";
 mongoose.connect(CONNECTION_STRING);
+if (process.env.DB_CONNECTION_STRING) {
+  console.log("connected to remote database");
+}
 
 const app = express();
 app.get("/hello", (req, res) => {
@@ -40,7 +44,7 @@ if (process.env.NODE_ENV !== "development") {
 }
 app.use(session(sessionOptions));
 app.use(express.json());
-homepageRoute(app);
+HomepageRoutes(app);
 BusinessRoutes(app);
 ReviewRoutes(app);
 UserRoutes(app);

@@ -7,9 +7,10 @@ function ReviewRoutes(app) {
   };
 
   const createReviewsByUser = async (req, res) => {
-    const { restaurantId, userId, reviewContent } = req.params;
+    const { restaurantId, username, userId, reviewContent } = req.params;
     const review = await dao.createReviewsByUser(
       userId,
+      username,
       restaurantId,
       reviewContent
     );
@@ -47,7 +48,7 @@ function ReviewRoutes(app) {
   app.get("/api/review/:restaurantId", findAllReviewsByRestaurantId); //ok
   app.get("/api/user/:userId/:restaurantId", findReviewByUserId); //ok
   app.post(
-    "/api/review/:restaurantId/:userId/:reviewContent",
+    "/api/review/:restaurantId/:userId/:reviewContent/:username",
     createReviewsByUser
   ); //ok
   app.put("/api/review/:restaurantId/:userId/:reviewContent", updateReviews); //ok

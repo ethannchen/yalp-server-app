@@ -11,9 +11,10 @@ export const findAllReviewsByRestaurantId = (restaurantId) =>
 export const deleteReviews = (userId, restaurantId) =>
   model.deleteOne({ userId: userId, restaurantId: restaurantId });
 
-export const createReviewsByUser = (userId, restaurantId, content) =>
+export const createReviewsByUser = (userId, username, restaurantId, content) =>
   model.create({
     userId,
+    username,
     restaurantId,
     content,
   });

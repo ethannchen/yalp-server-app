@@ -35,19 +35,25 @@ function ReviewRoutes(app) {
   };
 
   const getReviewsByUserId = async (req, res) => {
-    const {userId} = req.params;
+    const { userId } = req.params;
     const reviews = await dao.getReviewsByUserId(userId);
     res.json(reviews);
-  }
+  };
+  const getRecentReviews = async (req, res) => {
+    const reviews = await dao.getRecentReviews();
+    res.json(reviews);
+  };
 
   app.get("/api/review/:restaurantId", findAllReviewsByRestaurantId); //ok
   app.get("/api/user/:userId/:restaurantId", findReviewByUserId); //ok
-  app.get("/api/user/:userId", getReviewsByUserId); 
   app.post(
     "/api/review/:restaurantId/:userId/:reviewContent",
     createReviewsByUser
   ); //ok
   app.put("/api/review/:restaurantId/:userId/:reviewContent", updateReviews); //ok
   app.delete("/api/review/:restaurantId/:userId", deleteReviews); //ok
+
+  app.get("/api/reviews/:userId", getReviewsByUserId);
+  app.get("/api/reviews", getRecentReviews);
 }
 export default ReviewRoutes;
